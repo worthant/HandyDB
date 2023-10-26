@@ -1,93 +1,33 @@
 <!-- Here is the main logo and name of your project -->
 
 <p align="center">
-  <a href="resources/MVC.png">
+  <a href="resources/nosql.png">
     <picture>
-      <img src="resources/logo.png" height="150">
+      <img src="resources/nosql.png" height="220">
     </picture>
-    <h1 align="center">Project name</h1>
+    <h1 align="center">NoSQL Rust Database</h1>
   </a>
 </p>
 
-<!-- Here are some cool labels for your project, deledte those, that you don't need -->
+
+<!-- Here are some cool labels for your project, delete those, that you don't need -->
 
 <p align="center">
-   <a aria-label="Translation ro russian" href="./README_RU.md">
-      <img alt="" src="https://img.shields.io/badge/translation-RU-007FFF?style=for-the-badge&labelColor=000000&color=007FFF">
-   </a>
-   <a aria-label="WildFly Version" href="https://www.wildfly.org/">
-      <img alt="" src="https://img.shields.io/badge/WildFly-21.0.0-50FA7B?style=for-the-badge&labelColor=000000&color=50FA7B">
-   </a>
-   <a aria-label="Java Version" href="https://www.oracle.com/java/technologies/javase-jdk17-downloads.html">
-      <img alt="" src="https://img.shields.io/badge/Java-17-FFD300?style=for-the-badge&labelColor=000000&color=FFD300">
-   </a>
-   <a aria-label="JetBrains Runtime Version" href="https://www.jetbrains.com/">
-      <img alt="" src="https://img.shields.io/badge/JetBrains_Runtime-17.0.8-00CCFF?style=for-the-badge&labelColor=000000&color=00CCFF">
-   </a>
-   <a aria-label="Maven Project" href="https://maven.apache.org/">
-      <img alt="" src="https://img.shields.io/badge/Maven-Project-FF69B4?style=for-the-badge&labelColor=000000&color=FF69B4">
+   <a aria-label="Translation to Russian" href="./README_RU.md">
+      <img alt="" src="https://img.shields.io/badge/translation-RU-4A90E2?style=for-the-badge&labelColor=000000&color=FFFFA0">
    </a>
    <a aria-label="Repo size" href="https://github.com/worthant/labs-template-repository">
-    <img alt="" src="https://img.shields.io/github/repo-size/worthant/labs-template-repository?style=for-the-badge&logo=github&labelColor=000000&color=008080">
+    <img alt="" src="https://img.shields.io/github/repo-size/worthant/labs-template-repository?style=for-the-badge&logo=github&labelColor=000000&color=0DFFFF">
   </a>
-  <a aria-label="Translation" href="./README_RU.md">
-    <img alt="" src="https://img.shields.io/badge/translation-RU-red?style=for-the-badge&labelColor=000000">
-  </a>
-  <a aria-label="Build Status" href="https://github.com/worthant/simple-one-page-website/actions">
-    <img alt="" src="https://img.shields.io/github/actions/workflow/status/worthant/simple-one-page-website/php.yaml?branch=main&style=for-the-badge&logo=github-actions&labelColor=000000">
+  <a aria-label="Rust Version" href="https://www.rust-lang.org/">
+    <img alt="" src="https://img.shields.io/badge/Rust-1.73.0-000000?style=for-the-badge&labelColor=000000&color=FFDFAF">
   </a>
   <a aria-label="License" href="./LICENSE">
-    <img alt="" src="https://img.shields.io/github/license/worthant/labs-template-repository?style=for-the-badge&labelColor=000000">
+    <img alt="" src="https://img.shields.io/github/license/worthant/labs-template-repository?style=for-the-badge&labelColor=000000&color=33FFC1">
   </a>
-    <a aria-label="Vue.js version" href="https://vuejs.org/">
-    <img alt="" src="https://img.shields.io/badge/vue.js-v3.2.13-green.svg?style=for-the-badge&logo=vue.js&labelColor=000000">
-  </a>
-  <a aria-label="Vuetify Version" href="https://vuetifyjs.com/">
-    <img alt="" src="https://img.shields.io/badge/vuetify-v3.4.0-yellow.svg?style=for-the-badge&logo=vuetify&labelColor=000000">
-  </a>
-  <a aria-label="Yarn version" href="https://yarnpkg.com/">
-    <img alt="" src="https://img.shields.io/badge/yarn-v1.22.19-green.svg?style=for-the-badge&logo=yarn&labelColor=000000">
-  </a>
-  <a aria-label="Last commit" href="https://github.com/worthant/labs-template-repository/commits/main">
-    <img alt="" src="https://img.shields.io/github/last-commit/worthant/labs-template-repository?style=for-the-badge&logo=git&labelColor=000000">
-  </a>
-   <!-- New Badge for JavaServer Faces Framework -->
-   <a aria-label="JavaServer Faces Framework" href="https://www.oracle.com/java/technologies/javaserverfaces.html">
-      <img alt="" src="https://img.shields.io/badge/JSF-Framework-orange?style=for-the-badge&logo=java&labelColor=000000&color=orange">
-   </a>
-   <!-- New Badge for Managed Beans -->
-   <a aria-label="Managed Beans" href="#">
-      <img alt="" src="https://img.shields.io/badge/Managed_Beans-Supported-green?style=for-the-badge&logo=java&labelColor=000000&color=green">
-   </a>
-   <!-- New Badge for Java EE -->
-   <a aria-label="Java EE" href="https://www.oracle.com/java/technologies/java-ee-glance.html">
-      <img alt="" src="https://img.shields.io/badge/Java_EE-8-purple?style=for-the-badge&logo=java&labelColor=000000&color=8B008B">
-   </a>
-   <!-- New Badge for Session-scoped Managed Bean -->
-   <a aria-label="Session-scoped Managed Bean" href="#">
-      <img alt="" src="https://img.shields.io/badge/Session_Scoped-Managed_Bean-yellow?style=for-the-badge&logo=java&labelColor=000000&color=yellow">
-   </a>
-   <!-- New Badge for JDBC -->
-   <a aria-label="JDBC" href="#">
-      <img alt="" src="https://img.shields.io/badge/JDBC-Supported-red?style=for-the-badge&logo=java&labelColor=000000&color=red">
-   </a>
-   <!-- New Badge for Spring -->
-   <a aria-label="Spring" href="https://spring.io/">
-      <img alt="" src="https://img.shields.io/badge/Spring-2.5.5-brightgreen?style=for-the-badge&logo=spring&labelColor=000000&color=brightgreen">
-   </a>
-   <!-- New Badge for React -->
-   <a aria-label="React" href="https://reactjs.org/">
-      <img alt="" src="https://img.shields.io/badge/React-17.0.2-blue?style=for-the-badge&logo=react&labelColor=000000&color=blue">
-   </a>
-   <!-- New Badge for Redux -->
-   <a aria-label="Redux" href="https://redux.js.org/">
-      <img alt="" src="https://img.shields.io/badge/Redux-Supported-violet?style=for-the-badge&logo=redux&labelColor=000000&color=violet">
-   </a>
-   <!-- New Badge for Angular -->
-   <a aria-label="Angular" href="https://angular.io/">
-      <img alt="" src="https://img.shields.io/badge/Angular-12-red?style=for-the-badge&logo=angular&labelColor=000000&color=red">
-   </a>
 </p>
+
+
 
 <details open>
    <summary><b>Table of Contents</b></summary>
@@ -112,21 +52,21 @@
 
 ## Description 📝
 
-> 👋 **Welcome to this lab project!**
+> 👋 **Welcome to the NoSQL Rust Database project!**
 >
 > 🛠 **What is it?**  
-> `tell me what is it`
+> The NoSQL Rust Database is a lightweight, high-performance NoSQL database written in Rust. It is designed for efficient data storage and retrieval.
 >
-> 🎯 **Purpose of the Website**  
-> `why you need it` 😎
+> 🎯 **Purpose of the Database**  
+> The purpose of this database is to provide a fast and reliable data storage solution for applications that require NoSQL capabilities. It is optimized for speed and scalability.
 >
 > ---
 >
 > 📌 **Key Features**
 >
-> - 🖥 `feature one`
-> - 📊 `feature two`
-> - 🔒 `feature three`
+> - 🖥 Efficient data storage and retrieval.
+> - 📊 NoSQL data model for flexible schema.
+> - 🔒 High concurrency support.
 >
 > ---
 >
@@ -134,57 +74,51 @@
 
 <a id="requirements"></a>
 
-## Technical requirements
-
-...
+## Technical Requirements
 
 ### Goal:
 
 #### 📋 Core Components
 
-- [ ] ...
-- [ ] ...
-- [ ] ...
+- [ ] Data storage engine.
+- [ ] Query interface.
+- [ ] Indexing mechanism.
 
 #### 🎨 Design
 
-1. [ ] ...
-2. [ ] ...
-3. [ ] ...
+1. [ ] Schemaless data model.
+2. [ ] High concurrency support.
+3. [ ] Transaction support.
 
 #### 🌐 Deployment
 
-- [x] ...
+- [ ] Docker containerization for easy deployment.
 
 <a id="defense"></a>
 
 ## Topics for Lab Defense Preparation
 
-1. [ ] ...
-2. [ ] ...
-3. [ ] ...
-4. [ ] ...
-5. [ ] ...
-6. [ ] ...
-7. [ ] ...
-8. [ ] ...
-9. [ ] ...
-10. [ ] ...
-11. [ ] ...
-12. [ ] ...
-13. [ ] ...
-14. [ ] ...
+1. [ ] Database architecture and design.
+2. [ ] Rust programming language usage.
+3. [ ] Concurrency handling.
+4. [ ] Query optimization.
+5. [ ] NoSQL data model.
+6. [ ] Indexing strategies.
+7. [ ] Transaction management.
+8. [ ] Deployment and containerization.
 
 <a id="user-manual"></a>
 
-## How to use my project
+## How to Use My Project
 
 ...
 
 <a id="theory"></a>
 
-## Theoretical materials
+## Theoretical Materials
 
-1. **Topic 1**: link1
-2. **Topic 2**: link2  
-...
+1. **Learn rust**: [Rust book](https://rust-book.cs.brown.edu/ch01-01-installation.html)
+2. **Concurrency in Rust**: [Rust book chapter 16](https://rust-book.cs.brown.edu/ch16-00-concurrency.html)
+3. **Cassandra nosql db**: [docs](https://cassandra.apache.org/_/cassandra-basics.html)
+4. **What is nosql?**: [0](https://www.geeksforgeeks.org/types-of-nosql-databases/), [0.5](https://blazeclan.com/blog/dive-deep-types-nosql-databases/), [1](https://www.mongodb.com/nosql-explained), [2](https://javatechonline.com/types-of-nosql-databases-and-examples/#:~:text=Some%20examples%20of%20popular%20NoSQL,Riak%20are%20key%2Dvalue%20databases.), [3](https://www.spiceworks.com/tech/artificial-intelligence/articles/what-is-nosql/)
+5. **Rust docs**: [docs](https://doc.rust-lang.org/std/index.html)
