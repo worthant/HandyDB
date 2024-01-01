@@ -1,7 +1,5 @@
-use command_manager::CommandManager;
-mod command_manager;
-mod commands;
-mod utils;
+mod cli;
+use cli::CommandManager;
 
 fn main() {
     let mut manager = CommandManager::new();
