@@ -14,5 +14,6 @@ pub use self::oper::OperationsCommand;
 
 pub trait Command {
     fn execute(&self, args: Option<&[&str]>);
-    fn help(&self) -> String;
+    fn brief_descr(&self) -> &'static str;
+    fn detailed_descr(&self) -> &'static str;
 }
