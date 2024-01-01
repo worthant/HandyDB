@@ -10,7 +10,15 @@ impl Command for InfoCommand {
         println!("Size of Memory: <size>");
     }
 
-    fn help(&self) -> String {
-        "The 'info' command displays detailed information about the project, such as its name, author, initialization date, memory usage, and more.".to_string()
+    fn brief_descr(&self) -> &'static str {
+        "info - Display information about the project"
+    }
+
+    fn detailed_descr(&self) -> &'static str {
+        "The 'info' command provides detailed information about the HandyDB project:\n\
+         - Project Name: Displays the name of the project.\n\
+         - Author: Shows the name of the project's author.\n\
+         - Initialization Date: The date when the project was initiated.\n\
+         - Memory Usage: Current memory usage statistics of the application."
     }
 }

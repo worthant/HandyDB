@@ -8,7 +8,14 @@ impl Command for CloseCommand {
         std::process::exit(0);
     }
 
-    fn help(&self) -> String {
-        "The 'close' command shuts down the application safely.".to_string()
+    fn brief_descr(&self) -> &'static str {
+        "close - Close the program"
+    }
+
+    fn detailed_descr(&self) -> &'static str {
+        "The 'close' command:\n\
+         - Safely shuts down the application.\n\
+         - Ensures all operations are completed before exit.\n\
+         - Use this command to exit the program gracefully."
     }
 }

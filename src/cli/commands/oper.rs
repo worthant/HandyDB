@@ -43,7 +43,15 @@ impl Command for OperationsCommand {
         operations(a, b);
     }
 
-    fn help(&self) -> String {
-        "Showcases Rust's operations features, such as addition, subtraction, multiplication, division with and without remainder.".to_string()
+    fn brief_descr(&self) -> &'static str {
+        "oper - Perform arithmetic operations"
+    }
+
+    fn detailed_descr(&self) -> &'static str {
+        "The 'operations' command:\n\
+         - Performs basic arithmetic operations.\n\
+         - Prompts the user to enter two numbers (a and b).\n\
+         - Supports addition, subtraction, multiplication, and division.\n\
+         - Demonstrates Rust's capability in handling user input and arithmetic operations."
     }
 }
