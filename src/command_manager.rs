@@ -1,7 +1,6 @@
 use std::collections::HashMap;
 use std::io::{self, Write};
 use crate::commands::{Command, HelpCommand, InfoCommand, CloseCommand, RandomCommand, OperationsCommand};
-use crate::utils::print_in_box;
 
 pub struct CommandManager {
     commands: HashMap<String, Box<dyn Command>>,
@@ -32,27 +31,11 @@ impl CommandManager {
             match io::stdin().read_line(&mut input) {
                 Ok(_) => {
                     let parts: Vec<&str> = input.trim().split_whitespace().collect();
-                    if parts.is_empty() {
-                        continue;
-                    }
-                    if parts[0] == "help" {
-                        if parts.len() == 1 {
-                            self.commands.get("help").unwrap().execute();
-                        } else {
-                            let mut help_messages = Vec::new();
-                            for command in parts.iter().skip(1) {
-                                let help_message = match self.commands.get(*command) {
-                                    Some(cmd) => cmd.help(),
-                                    None => format!("No help available for: {}", command),
-                                };
-                                help_messages.push(help_message);
-                            }
-                            print_in_box("Help", &help_messages.iter().map(AsRef::as_ref).collect::<Vec<&str>>());
+                    if let Some((command_name, args)) = parts.split_first() {
+                        match self.commands.get(*command_name) {
+                            Some(command) => command.execute(Some(args)),
+                            None => println!("Unknown command: {}", command_name),
                         }
-                    } else if let Some(cmd) = self.commands.get(parts[0]) {
-                        cmd.execute();
-                    } else {
-                        println!("Unknown command: {}", parts[0]);
                     }
                 },
                 Err(error) => println!("Error reading input: {}", error),
