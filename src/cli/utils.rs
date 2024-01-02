@@ -9,17 +9,24 @@ pub fn print_in_box(title: &str, messages: &[&str]) {
     let left_border_length = total_border_length / 2;
     let right_border_length = total_border_length - left_border_length;
 
-    let left_border = "═".repeat(left_border_length);
-    let right_border = "═".repeat(right_border_length - 2);
+    // Use different characters based on the OS
+    let (horizontal_line, vertical_line, left_top_corner, right_top_corner, right_bottom_corner, left_bottom_corner) = if cfg!(target_os = "windows") {
+        ("-", "|", "+", "+", "+", "+") // ASCII characters for Windows
+    } else {
+        ("═", "║", "╔", "╗", "╝", "╚") // Unicode characters for Unix-like systems
+    };    
 
-    println!("\n╔{} {} {}╗", left_border, title, right_border);
+    let left_border = horizontal_line.repeat(left_border_length);
+    let right_border = horizontal_line.repeat(right_border_length - 2);
+
+    println!("\n{}{} {} {}{}", left_top_corner, left_border, title, right_border, right_top_corner);
     for &message in messages {
         for line in wrap_text(message, max_message_length).iter() {
             let padding = " ".repeat(max_message_length - line.len());
-            println!("║ {}{} ║", line, padding);
+            println!("{} {}{} {}", vertical_line, line, padding, vertical_line);
         }
     }
-    println!("╚{}╝\n", "═".repeat(terminal_width - 2));
+    println!("{}{}{}", left_bottom_corner, horizontal_line.repeat(terminal_width - 2), right_bottom_corner);
 }
 
 fn wrap_text(text: &str, max_length: usize) -> Vec<String> {
