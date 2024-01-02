@@ -1,4 +1,4 @@
-use super::{Command, InfoCommand, RandomCommand, OperationsCommand, CloseCommand};
+use super::{Command, InfoCommand, RandomCommand, OperationsCommand, CloseCommand, GetCommand, SetCommand};
 use crate::cli::utils::print_in_box;
 use std::collections::HashSet;
 
@@ -11,7 +11,9 @@ impl Command for HelpCommand {
             ("info", InfoCommand.brief_descr(), InfoCommand.detailed_descr()),
             ("rand", RandomCommand.brief_descr(), RandomCommand.detailed_descr()),
             ("oper", OperationsCommand.brief_descr(), OperationsCommand.detailed_descr()),
-            ("close", CloseCommand.brief_descr(), CloseCommand.detailed_descr())
+            ("close", CloseCommand.brief_descr(), CloseCommand.detailed_descr()),
+            ("set", SetCommand::brief_descr(), SetCommand::detailed_descr()),
+            ("get", GetCommand::brief_descr(), GetCommand::detailed_descr()),            
             // ... commands for the kv_store, network and other things here in the future
         ];
 

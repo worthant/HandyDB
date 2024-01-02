@@ -4,6 +4,7 @@ pub struct InfoCommand;
 
 impl Command for InfoCommand {
     fn execute(&self, _args: Option<&[&str]>) {
+        // TODO: add implementation for showcasing info about kv-store and the database overall
         println!("Project Name: HandyDB");
         println!("Author: Dvorkin Boris a.k.a worthant");
         println!("Date of Initialization: <date>");
