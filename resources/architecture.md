@@ -1,7 +1,7 @@
 # Архитектура HandyDB
 
-```
-no-sql-rust-database/
+```rust
+HandyDB/
 │
 ├── Cargo.toml
 ├── Cargo.lock
@@ -17,6 +17,7 @@ no-sql-rust-database/
     │   │   ├── help.rs
     │   │   ├── info.rs
     │   │   ... other commands
+    │   ├── mod.rs              // CLI module
     │   └── utils.rs              // CLI utility functions
     │
     ├── db/                       // Core database functionalities
@@ -50,5 +51,4 @@ no-sql-rust-database/
         ├── kv_store_tests.rs
         ├── shard_tests.rs        // Tests for sharding
         └── partition_tests.rs    // Tests for partitioning
-
 ```
