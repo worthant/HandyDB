@@ -1,6 +1,8 @@
 use std::collections::HashMap;
 use std::io::{self, Write};
-use super::commands::{Command, HelpCommand, InfoCommand, CloseCommand, RandomCommand, OperationsCommand};
+use std::sync::{Arc, Mutex};
+use crate::db::KvStore;
+use super::commands::{Command, HelpCommand, InfoCommand, CloseCommand, RandomCommand, OperationsCommand, SetCommand, GetCommand};
 
 pub struct CommandManager {
     commands: HashMap<String, Box<dyn Command>>,
@@ -15,12 +17,14 @@ impl CommandManager {
         self.commands.insert(name.to_string(), command);
     }
 
-    pub fn setup_commands(&mut self) {
+    pub fn setup_commands(&mut self, kv_store: Arc<Mutex<KvStore>>) {
         self.register_command("help", Box::new(HelpCommand));
         self.register_command("info", Box::new(InfoCommand));
         self.register_command("close", Box::new(CloseCommand));
         self.register_command("rand", Box::new(RandomCommand));
         self.register_command("oper", Box::new(OperationsCommand));
+        self.register_command("set", Box::new(SetCommand::new(kv_store.clone())));
+        self.register_command("get", Box::new(GetCommand::new(kv_store)));
     }
 
     pub fn run(&mut self) {
