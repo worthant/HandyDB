@@ -26,7 +26,7 @@ impl Command for GetCommand {
             if args.len() == 1 {
                 let key = args[0].to_string();
                 let kv_store = self.kv_store.lock().unwrap();
-                match kv_store.get(key) {
+                match kv_store.get(&key) {
                     Some(value) => println!("Value: {}", value),
                     None => println!("Key not found"),
                 }
