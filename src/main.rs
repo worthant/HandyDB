@@ -6,11 +6,15 @@ use db::KvStore;
 mod db;
 mod cli;
 
+fn create_shared_kv_store() -> Arc<Mutex<KvStore>> {
+    Arc::new(Mutex::new(KvStore::new()))
+}
+
 fn main() {
-    println!("Hello from {}! This HandyDB release was compiled on {}.", CURRENT_PLATFORM, COMPILED_ON);
+    println!("Hello from {}! This HandyDB release was compiled for {}.", CURRENT_PLATFORM, COMPILED_ON);
 
     // Init our first and last HandyDB instance of this application
-    let kv_store = Arc::new(Mutex::new(KvStore::new()));
+    let kv_store = create_shared_kv_store();
 
     // Init CLI
     let mut manager = CommandManager::new();
