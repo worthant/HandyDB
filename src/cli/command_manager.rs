@@ -17,6 +17,26 @@ impl CommandManager {
         self.commands.insert(name.to_string(), command);
     }
 
+    // TODO: Implement the following commands for HandyDB
+    // set <key> <value> - Sets or updates a value for a given key
+    // get <key> - Retrieves the value associated with a given key
+    // add <key> <value> - Adds a new key-value pair, errors if key exists
+    // append <value> - Appends a value with an auto-generated key
+    // delete <key> - Deletes a key-value pair based on the key
+    // exists <key> - Checks if a key exists in the database
+    // list or keys - Lists all keys in the database
+    // clear - Clears all data from the database
+    // update <key> <value> - Updates the value for an existing key, errors if key doesn't exist
+    // info - Displays information about the database
+    // help - Displays help information about commands
+    // exit or quit - Exits the database CLI
+    // export <filename> - Exports database contents to a file
+    // import <filename> - Imports data from a file into the database
+    // find <pattern> - Searches for keys matching a pattern
+    // history - Shows a history of executed commands (optional)
+    // stats - Shows statistics about database usage and performance
+    // rename <old_key> <new_key> - Renames a key
+    // merge <key1> <key2> <new_key> - Merges two keys into a new key
     pub fn setup_commands(&mut self, kv_store: Arc<Mutex<KvStore>>) {
         self.register_command("help", Box::new(HelpCommand));
         self.register_command("info", Box::new(InfoCommand));
