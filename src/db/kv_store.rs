@@ -2,8 +2,10 @@
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
+use crate::models::KvPair;
+
 pub struct KvStore {
-    store: Arc<Mutex<HashMap<String, String>>>,
+    store: Arc<Mutex<HashMap<String, KvPair>>>,
 }
 
 impl KvStore {
@@ -15,12 +17,12 @@ impl KvStore {
 
     pub fn set(&self, key: String, value: String) {
         let mut store = self.store.lock().unwrap();
-        store.insert(key, value);
+        store.insert(key.clone(), KvPair::new(key, value));
     }
 
     pub fn get(&self, key: String) -> Option<String> {
         let store = self.store.lock().unwrap();
-        store.get(&key).cloned()
+        store.get(&key).map(|kv_pair| kv_pair.value.clone())
     }
 }
 

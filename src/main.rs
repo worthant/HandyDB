@@ -5,6 +5,7 @@ use db::KvStore;
 
 mod db;
 mod cli;
+mod models;
 
 fn create_shared_kv_store() -> Arc<Mutex<KvStore>> {
     Arc::new(Mutex::new(KvStore::new()))
