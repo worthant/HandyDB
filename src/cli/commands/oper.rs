@@ -5,6 +5,10 @@ use std::io::{self, Write};
 pub struct OperationsCommand;
 
 impl Command for OperationsCommand {
+
+    // TODO:
+    // make this command not just show some random numbers, but add the values of specific id's
+    // could be usefull to sum values of different keys, or to divide them, multiply, e.t.c.
     fn execute(&self, _args: Option<&[&str]>) {
         println!("Please, enter a and b!");
 
