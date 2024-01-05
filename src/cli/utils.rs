@@ -9,9 +9,9 @@ pub fn print_in_box(title: &str, messages: &[&str]) {
     let left_border_length = total_border_length / 2;
     let right_border_length = total_border_length - left_border_length;
 
-    // Use different characters based on the OS
+    // Use different characters based on the OScaro 
     let (newline, horizontal_line, vertical_line, left_top_corner, right_top_corner, right_bottom_corner, left_bottom_corner) = if cfg!(target_os = "windows") {
-        ("\r", "-", "|", "+", "+", "+", "+") // ASCII characters for Windows
+        ("\r\n", "-", "|", "+", "+", "+", "+") // ASCII characters for Windows
     } else {
         ("\n", "═", "║", "╔", "╗", "╝", "╚") // Unicode characters for Unix-like systems
     };    
