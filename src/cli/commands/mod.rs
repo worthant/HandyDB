@@ -6,6 +6,7 @@ pub mod history;
 pub mod oper;
 pub mod set;
 pub mod get;
+pub mod test;
 
 pub use self::help::HelpCommand;
 pub use self::info::InfoCommand;
@@ -14,6 +15,7 @@ pub use self::rand::RandomCommand;
 pub use self::oper::OperationsCommand;
 pub use self::set::SetCommand;
 pub use self::get::GetCommand;
+pub use self::test::TestCommand;
 
 // pub use self::history::HistoryCommand;
 

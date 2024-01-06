@@ -1,8 +1,8 @@
 use std::collections::HashMap;
 use std::io::{self, Write};
-use std::sync::{Arc, Mutex};
+use std::sync::Arc;
 use crate::db::KvStore;
-use super::commands::{Command, HelpCommand, InfoCommand, CloseCommand, RandomCommand, OperationsCommand, SetCommand, GetCommand};
+use super::commands::{Command, HelpCommand, InfoCommand, CloseCommand, RandomCommand, OperationsCommand, SetCommand, GetCommand, TestCommand};
 
 pub struct CommandManager {
     commands: HashMap<String, Box<dyn Command>>,
@@ -37,14 +37,15 @@ impl CommandManager {
     // stats - Shows statistics about database usage and performance
     // rename <old_key> <new_key> - Renames a key
     // merge <key1> <key2> <new_key> - Merges two keys into a new key
-    pub fn setup_commands(&mut self, kv_store: Arc<Mutex<KvStore>>) {
+    pub fn setup_commands(&mut self, kv_store: Arc<KvStore>) {
         self.register_command("help", Box::new(HelpCommand));
         self.register_command("info", Box::new(InfoCommand));
         self.register_command("close", Box::new(CloseCommand));
         self.register_command("rand", Box::new(RandomCommand));
         self.register_command("oper", Box::new(OperationsCommand));
         self.register_command("set", Box::new(SetCommand::new(kv_store.clone())));
-        self.register_command("get", Box::new(GetCommand::new(kv_store)));
+        self.register_command("get", Box::new(GetCommand::new(kv_store.clone())));
+        self.register_command("test", Box::new(TestCommand::new(kv_store.clone())));
     }
 
     pub fn run(&mut self) {

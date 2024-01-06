@@ -1,13 +1,13 @@
 use super::Command;
 use crate::db::KvStore;
-use std::sync::{Arc, Mutex};
+use std::sync::Arc;
 
 pub struct SetCommand {
-    kv_store: Arc<Mutex<KvStore>>,
+    kv_store: Arc<KvStore>,
 }
 
 impl SetCommand {
-    pub fn new(kv_store: Arc<Mutex<KvStore>>) -> Self {
+    pub fn new(kv_store: Arc<KvStore>) -> Self {
         SetCommand { kv_store }
     }
 
@@ -26,8 +26,9 @@ impl Command for SetCommand {
             if args.len() == 2 {
                 let key = args[0].to_string();
                 let value = args[1].to_string();
-                let kv_store = self.kv_store.lock().unwrap();
-                kv_store.set(key, value);
+                let start = std::time::Instant::now();
+                self.kv_store.set(key, value);
+                println!("Execution of 'set' time: {:?}", start.elapsed());
                 println!("Value set successfully");
             } else {
                 println!("Usage: set <key> <value>");

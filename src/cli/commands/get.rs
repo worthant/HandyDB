@@ -1,13 +1,13 @@
 use super::Command;
 use crate::db::KvStore;
-use std::sync::{Arc, Mutex};
+use std::sync::Arc;
 
 pub struct GetCommand {
-    kv_store: Arc<Mutex<KvStore>>,
+    kv_store: Arc<KvStore>,
 }
 
 impl GetCommand {
-    pub fn new(kv_store: Arc<Mutex<KvStore>>) -> Self {
+    pub fn new(kv_store: Arc<KvStore>) -> Self {
         GetCommand { kv_store }
     }
 
@@ -25,8 +25,7 @@ impl Command for GetCommand {
         if let Some(args) = args {
             if args.len() == 1 {
                 let key = args[0].to_string();
-                let kv_store = self.kv_store.lock().unwrap();
-                match kv_store.get(&key) {
+                match self.kv_store.get(&key) {
                     Some(value) => println!("Value: {}", value),
                     None => println!("Key not found"),
                 }
