@@ -15,13 +15,12 @@ pub fn create_shared_kv_store() -> Arc<KvStore> {
     Arc::new(KvStore::new())
 }
 
-
 fn main() {
     println!("Hello from {}! This HandyDB release was compiled for {}.", CURRENT_PLATFORM, COMPILED_ON);
 
     // Enable logging
-    std::env::set_var("RUST_LOG", "debug");
-    env_logger::init();
+    // std::env::set_var("RUST_LOG", "debug");
+    // env_logger::init();
 
     // Init our first and last HandyDB instance of this application
     let kv_store = create_shared_kv_store();
@@ -37,9 +36,9 @@ fn main() {
         manager.run();
     });
 
-    // Create a new Tokio runtime
+    // New Tokio runtime
     let runtime = tokio::runtime::Builder::new_multi_thread()
-        .worker_threads(16) // You can adjust the number of threads
+        .worker_threads(20) // number of threads
         .enable_all()
         .build()
         .unwrap();
