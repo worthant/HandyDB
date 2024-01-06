@@ -9,8 +9,7 @@ use tokio::spawn;
 
 
 // Standalone asynchronous function for set operation over HTTP
-async fn set_operation_http(key: String, value: String) -> reqwest::Result<()> {
-    let client = Client::new();
+async fn set_operation_http(client: &Client, key: String, value: String) -> reqwest::Result<()> {
     let set_request = serde_json::json!({ "key": key, "value": value });
 
     client.post("http://127.0.0.1:8080/set")
@@ -54,6 +53,8 @@ impl TestCommand {
                             return;
                         }
                     };
+
+                    let client = Client::new();
                     let mut durations = Vec::new();
                     let (tx, mut rx) = mpsc::channel::<()>(num);
 
@@ -61,10 +62,11 @@ impl TestCommand {
                         let key = format!("key{}", i);
                         let value = format!("value{}", i);
                         let tx_clone = tx.clone();
+                        let client_ref = client.clone();
                         
                         let duration = Self::measure(|| {
                             tokio::spawn(async move {
-                                match set_operation_http(key, value).await {
+                                match set_operation_http(&client_ref, key, value).await {
                                     Ok(_) => (),
                                     Err(e) => {
                                         eprintln!("Error during set operation: {:?}", e);
