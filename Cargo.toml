@@ -1,14 +1,22 @@
 [package]
-name = "no-sql-rust-database"
-version = "0.1.0"
+name = "HandyDB"
+version = "1.2.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+actix-web = "4.4.1"
 current_platform = "0.2.0"
 dashmap = "5.5.3"
+env_logger = "0.10.1"
+feature = "0.5.1"
+futures = "0.3.30"
 rand = "0.8.5"
 rayon = "1.8.0"
+reqwest = { version = "0.11.23", features= ["json"] }
+serde = { version= "1.0.194", features = ["derive"] }
+serde_json = "1.0.111"
 term_size = "0.3.2"
 threadpool = "1.8.1"
+tokio = { version = "1.35.1", features = ["full"] }
