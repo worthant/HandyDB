@@ -11,7 +11,7 @@ impl Command for OperationsCommand {
     // could be usefull to sum values of different keys, or to divide them, multiply, e.t.c.
     fn execute(&self, _args: Option<&[&str]>) {
         println!("Please, enter a and b!");
-
+        
         let a = loop {
             print!("a: ");
             io::stdout().flush().unwrap();
