@@ -1,4 +1,4 @@
-use std::{sync::{Arc, Mutex}, thread};
+use std::{sync::Arc, thread};
 use actix_web::{HttpServer, App, web};
 use current_platform::{COMPILED_ON, CURRENT_PLATFORM};
 use cli::CommandManager;
@@ -11,12 +11,12 @@ mod models;
 mod tests;
 mod network;
 
-fn create_shared_kv_store() -> Arc<Mutex<KvStore>> {
-    Arc::new(Mutex::new(KvStore::new()))
+pub fn create_shared_kv_store() -> Arc<KvStore> {
+    Arc::new(KvStore::new())
 }
 
-#[actix_web::main]
-async fn main() -> std::io::Result<()> {
+
+fn main() {
     println!("Hello from {}! This HandyDB release was compiled for {}.", CURRENT_PLATFORM, COMPILED_ON);
 
     // Enable logging
@@ -28,6 +28,7 @@ async fn main() -> std::io::Result<()> {
 
     // CLone KvStore for CLI 
     let cli_kv_store = kv_store.clone();
+
     
     // Run CLI in a separate thread
     thread::spawn(move || {
@@ -36,6 +37,21 @@ async fn main() -> std::io::Result<()> {
         manager.run();
     });
 
+    // Create a new Tokio runtime
+    let runtime = tokio::runtime::Builder::new_multi_thread()
+        .worker_threads(16) // You can adjust the number of threads
+        .enable_all()
+        .build()
+        .unwrap();
+
+    match runtime.block_on(async_main(kv_store.clone())) {
+        Ok(_) => println!("Tokio runtime created"),
+        Err(e) => eprintln!("Error occured: {:?}", e),
+    }
+
+}
+
+pub async fn async_main(kv_store: Arc<KvStore>) -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
         .app_data(web::Data::new(kv_store.clone()))
