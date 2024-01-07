@@ -25,17 +25,17 @@ cargo build --release
 ```
 
 ```bash
-cross build --target x86_64-pc-windows-gnu --release
+cross build --target x86_64-pc-windows-msvc --release
 ```
 
 ### Archive releases
 
 ```bash
-tar -czvf no-sql-rust-database-linux.tar.gz -C target/release no-sql-rust-database
+tar -czvf handy_db-x86_64-linux-gnu.tar.gz -C target/release handy_db
 ```
 
 ```bash
-zip no-sql-rust-database-windows.zip -j target/x86_64-pc-windows-gnu/release/no-sql-rust-database.exe
+zip handy_db-x86_64-windows-msvc.zip -j target/x86_64-pc-windows-msvc/release/handy_db.exe
 ```
 
 ---
