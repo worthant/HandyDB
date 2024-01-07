@@ -1,6 +1,5 @@
 use std::{sync::Arc, thread};
 use actix_web::{HttpServer, App, web};
-use current_platform::{COMPILED_ON, CURRENT_PLATFORM};
 use cli::CommandManager;
 use db::KvStore;
 use crate::network::configure_services;
@@ -16,7 +15,18 @@ pub fn create_shared_kv_store() -> Arc<KvStore> {
 }
 
 fn main() {
-    println!("Hello from {}! This HandyDB release was compiled for {}.", CURRENT_PLATFORM, COMPILED_ON);
+    let compiled_for = if cfg!(target_os = "windows") {
+        "x86_64-windows-msvc"
+    } else if cfg!(target_os = "linux") {
+        "x86_64-linux-gnu"
+    } else {
+        // Add ORM here for fun
+        "unknown"
+    };
+
+    println!("Hello! This HandyDB release was compiled for {}.", compiled_for);
+        
+
 
     // Enable logging
     // std::env::set_var("RUST_LOG", "debug");
