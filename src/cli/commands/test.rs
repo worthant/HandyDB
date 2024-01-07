@@ -1,11 +1,10 @@
 use super::Command;
 use crate::db::KvStore;
+use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use reqwest::Client;
-use tokio::time::sleep;
 use tokio::sync::mpsc;
-use tokio::spawn;
 
 
 // Standalone asynchronous function for set operation over HTTP
@@ -54,44 +53,65 @@ impl TestCommand {
                         }
                     };
 
-                    let client = Client::new();
-                    let mut durations = Vec::new();
-                    let (tx, mut rx) = mpsc::channel::<()>(num);
+                    let batch_size = 200; // requests per Client
+                    let num_clients = (num as f64 / batch_size as f64).ceil() as usize;
+                    let mut clients = Vec::with_capacity(num_clients);
+                    let error_counts = Arc::new(tokio::sync::Mutex::new(HashMap::<String, usize>::new()));
 
-                    for i in 0..num {
-                        let key = format!("key{}", i);
-                        let value = format!("value{}", i);
-                        let tx_clone = tx.clone();
-                        let client_ref = client.clone();
-                        
-                        let duration = Self::measure(|| {
-                            tokio::spawn(async move {
-                                match set_operation_http(&client_ref, key, value).await {
-                                    Ok(_) => (),
-                                    Err(e) => {
-                                        eprintln!("Error during set operation: {:?}", e);
-                                        let _ = tx_clone.send(()).await; // send an error signal
-                                    }
-                                }
-                            });
-                        });
-                        durations.push(duration);
+                    for _ in 0..num_clients {
+                        clients.push(Client::new());
                     }
+
+                    let mut durations = Vec::new();
+                    let (tx, _rx) = mpsc::channel::<()>(num);
+
+                    for (i, client) in clients.into_iter().enumerate() {
+                        let start_index = i * batch_size;
+                        let end_index = ((i + 1) * batch_size).min(num);
+                        let client_ref = Arc::new(client);
+                        let error_counts_ref = error_counts.clone();
+
+                        for _j in start_index..end_index {
+
+                            let key = format!("key{}", i);
+                            let value = format!("value{}", i);
+                            let tx_clone = tx.clone();
+                            let client_clone = client_ref.clone();
+                            let error_counts_ref = error_counts_ref.clone();
+                            
+                            let duration = Self::measure(|| {
+                                tokio::spawn(async move {
+                                    match set_operation_http(&client_clone, key, value).await {
+                                        Ok(_) => (),
+                                        Err(e) => {
+                                            let mut errors = error_counts_ref.lock().await;
+                                            *errors.entry(e.to_string()).or_insert(0) += 1;
+                                            let _ = tx_clone.send(()).await;
+                                        }
+                                    }
+                                });
+                            });
+                            durations.push(duration);
+                        }
+                    }
+
 
                     drop(tx); // Close the channel
-
-                    // Count errors
-                    let mut errors = 0;
-                    while rx.recv().await.is_some() {
-                        errors += 1;
-                    }
 
                     // Output total and average time
                     let total_duration: Duration = durations.iter().sum();
                     let avg_duration = total_duration / num as u32;
                     println!("Total time: {:?}", total_duration);
                     println!("Average time per set operation: {:?}", avg_duration);
-                    println!("Number of errors: {}", errors);
+
+                    // Print error summary
+                    let errors = error_counts.lock().await;
+                    println!("Number of different errors: {}", errors.len());
+                    for (error, count) in errors.iter() {
+                        println!("Error: {:?}", error);
+                        println!("Occurences: {}", count);
+                    }
+                    
                 }
                 ["set", num] => {
                     let num: usize = match num.parse() {

@@ -1,12 +1,9 @@
-use std::sync::Arc;
-use reqwest;
-use futures::future::join_all;
-use tokio::sync::Semaphore;
-
-
 // 3.5s for 5_000 'set' requests
 #[tokio::test]
 async fn test_multiple_set_requests() {
+    use reqwest;
+    use futures::future::join_all;
+
     let client = reqwest::Client::new();
 
     let requests = (0..5000).map(|i| {
@@ -36,6 +33,10 @@ async fn test_multiple_set_requests() {
 // 5s for 10_000 'set' requests
 #[tokio::test]
 async fn test_multiple_set_requests_semaphore() {
+    use std::sync::Arc;
+    use reqwest;
+    use futures::future::join_all;
+    use tokio::sync::Semaphore;
     let client = reqwest::Client::new();
     let semaphore = Arc::new(Semaphore::new(5000));
 
@@ -73,6 +74,7 @@ async fn test_multiple_set_requests_semaphore() {
 // 3.5s for 5_000 'get' requests
 #[tokio::test]
 async fn test_multiple_get_requests() {
+    use futures::future::join_all;
     let client = reqwest::Client::new();
 
     let requests = (0..5000).map(|i| {
