@@ -5,7 +5,7 @@
     <picture>
       <img src="resources/nosql.png" height="220">
     </picture>
-    <h1 align="center">NoSQL Rust Database</h1>
+    <h1 align="center">HandyDB</h1>
   </a>
 </p>
 
@@ -76,42 +76,65 @@
 
 ## Technical Requirements
 
-### Goal:
+### Goal
+
+    - Develop in-memory key-value store  
+    - Use it as a nosql database if needed
 
 #### 📋 Core Components
 
-- [ ] Data storage engine.
-- [ ] Query interface.
-- [ ] Indexing mechanism.
+- [x] In-memory key-value store.
+- [x] Shard Manager.
+- [x] CLI.
+- [x] Http server
 
 #### 🎨 Design
 
-1. [ ] Schemaless data model.
-2. [ ] High concurrency support.
-3. [ ] Transaction support.
+1. [x] `DashMap` - **used as a core data structure in kv_store**
 
-#### 🌐 Deployment
+> It's a concurrent implementation of HashMap (manages concurrent access to data).
 
-- [ ] Docker containerization for easy deployment.
+1. [ ] Transaction support
+1. [x] `Tokio` - high **concurrent** **multithread** runtime enrivonment
+1. [x] `Actix-web` - highly performant **http-server**, working in Tokio environment
+1. [x] `KvPair model` - model for extending simple value functionality with some metadata
+1. [x] `Shard model` - model of shard, representing **kv_stores** with **DashMap**
 
-<a id="defense"></a>
+#### Sharding model
 
-## Topics for Lab Defense Preparation
-
-1. [ ] Database architecture and design.
-2. [ ] Rust programming language usage.
-3. [ ] Concurrency handling.
-4. [ ] Query optimization.
-5. [ ] NoSQL data model.
-6. [ ] Indexing strategies.
-7. [ ] Transaction management.
-8. [ ] Deployment and containerization.
+```r
++---------------------------------------------------+
+| HandyDB Cluster                                   |
+| +-----------+   +-----------+   +-----------+     |
+| | Shard 1   |   | Shard 2   |   | Shard 3   |     |
+| | Port 8081 |   | Port 8082 |   | Port 8083 |     |
+| | Shard ID 1|   | Shard ID 2|   | Shard ID 3|     |
+| +-----------+   +-----------+   +-----------+     |
+|                                                   |
+| +-------------------------------------------------+
+| | Shard Manager (on each shard)                   |
+| | - Knows other shards                            |
+| | - Routes requests based on shard responsibility |
+| +-------------------------------------------------+
+```
 
 <a id="user-manual"></a>
 
 ## How to Use My Project
 
-...
+Just download latest release and execute it
+
+Usage for creating a shard:
+
+```shell
+./handy_db --port <port> --shard-id [Shard_ID]
+```
+
+Example:
+
+```shell
+./handy_db --port 32320 --shard-id shardA
+```
 
 <a id="theory"></a>
 
