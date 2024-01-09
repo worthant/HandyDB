@@ -25,7 +25,7 @@ cargo build --release
 ```
 
 ```bash
-cross build --target x86_64-pc-windows-msvc --release
+cross build --target x86_64-pc-windows-gnu --release
 ```
 
 ### Archive releases
@@ -35,7 +35,7 @@ tar -czvf handy_db-x86_64-linux-gnu.tar.gz -C target/release handy_db
 ```
 
 ```bash
-zip handy_db-x86_64-windows-msvc.zip -j target/x86_64-pc-windows-msvc/release/handy_db.exe
+zip handy_db-x86_64-windows-gnu.zip -j target/x86_64-pc-windows-gnu/release/handy_db.exe
 ```
 
 ---

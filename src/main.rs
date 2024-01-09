@@ -44,8 +44,11 @@ fn main() {
     let logger = Logger::new();
     logger.log_platform_info();
 
-    // Initialize Shard Manager here
+    // Init Shard Manager
     // let shard_manager = Arc::new(ShardManager::new(shard_id.clone()));
+
+    // Now, we don't need kv_store, because we're using shard_manager
+    // let cli_kv_store = create_shared_kv_store(shard_manager.clone());
 
     let kv_store = create_shared_kv_store();
 

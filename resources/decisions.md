@@ -7,3 +7,8 @@
 ## Models
 
 - Created `KvPair model` for extending the functionality later (**want to add timestamps(for leaderbords, for example)**)
+- Shard model (same as kv_pair, just more clear naming and + ShardEndpoint)
+
+## Networking
+
+- `5000` port for broadcasting
