@@ -102,19 +102,20 @@ https://github.com/worthant/HandyDB/assets/43885024/151209aa-ebb5-4337-987d-c8b6
 #### Sharding model
 
 ```r
-+---------------------------------------------------+
-| HandyDB Cluster                                   |
-| +-----------+   +-----------+   +-----------+     |
-| | Shard 1   |   | Shard 2   |   | Shard 3   |     |
-| | Port 8081 |   | Port 8082 |   | Port 8083 |     |
-| | Shard ID 1|   | Shard ID 2|   | Shard ID 3|     |
-| +-----------+   +-----------+   +-----------+     |
-|                                                   |
-| +-------------------------------------------------+
-| | Shard Manager (on each shard)                   |
-| | - Knows other shards                            |
-| | - Routes requests based on shard responsibility |
-| +-------------------------------------------------+
++-----------------------------------------------------+
+| HandyDB Cluster                                     |
+| +-----------+   +-----------+   +-----------+       |
+| | Shard 1   |   | Shard 2   |   | Shard 3   |       |
+| | Port 8081 |   | Port 8082 |   | Port 8083 |       |
+| | Shard ID 1|   | Shard ID 2|   | Shard ID 3|       |
+| +-----------+   +-----------+   +-----------+       |
+|                                                     |
+| +-------------------------------------------------+ |
+| | Shard Manager (on each shard)                   | |
+| | - Knows other shards                            | |
+| | - Routes requests based on shard responsibility | |
+| +-------------------------------------------------+ |
++-----------------------------------------------------+
 ```
 
 <a id="user-manual"></a>
